@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="login_mst">
+    <Key>
+      <PropertyRef Name="login_id" />
+    </Key>
+    <Property Name="login_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reg_id" Type="Int32" />
+    <Property Name="user_nm" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="password1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="isactive" Type="Boolean" />
+    <NavigationProperty Name="registration_mst" Relationship="Self.FK__login_mst__reg_i__15502E78" FromRole="login_mst" ToRole="registration_mst" />
+    <NavigationProperty Name="sequrity_mst" Relationship="Self.FK__sequrity___login__182C9B23" FromRole="login_mst" ToRole="sequrity_mst" />
+  </EntityType>
+  <EntityType Name="registration_mst">
+    <Key>
+      <PropertyRef Name="reg_id" />
+    </Key>
+    <Property Name="reg_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="last_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="birth_date" Type="DateTime" Precision="3" />
+    <Property Name="ac_no" Type="Int32" />
+    <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="branch_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="login_mst" Relationship="Self.FK__login_mst__reg_i__15502E78" FromRole="registration_mst" ToRole="login_mst" />
+  </EntityType>
+  <EntityType Name="sequrity_mst">
+    <Key>
+      <PropertyRef Name="sec_id" />
+    </Key>
+    <Property Name="sec_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login_id" Type="Int32" />
+    <Property Name="q1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ans1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="q2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ans2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="q3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ans3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="login_mst" Relationship="Self.FK__sequrity___login__182C9B23" FromRole="sequrity_mst" ToRole="login_mst" />
+  </EntityType>
+  <Association Name="FK__login_mst__reg_i__15502E78">
+    <End Role="registration_mst" Type="Self.registration_mst" Multiplicity="0..1" />
+    <End Role="login_mst" Type="Self.login_mst" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="registration_mst">
+        <PropertyRef Name="reg_id" />
+      </Principal>
+      <Dependent Role="login_mst">
+        <PropertyRef Name="reg_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sequrity___login__182C9B23">
+    <End Role="login_mst" Type="Self.login_mst" Multiplicity="0..1" />
+    <End Role="sequrity_mst" Type="Self.sequrity_mst" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login_mst">
+        <PropertyRef Name="login_id" />
+      </Principal>
+      <Dependent Role="sequrity_mst">
+        <PropertyRef Name="login_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BankingEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="login_mst" EntityType="Self.login_mst" />
+    <EntitySet Name="registration_mst" EntityType="Self.registration_mst" />
+    <EntitySet Name="sequrity_mst" EntityType="Self.sequrity_mst" />
+    <AssociationSet Name="FK__login_mst__reg_i__15502E78" Association="Self.FK__login_mst__reg_i__15502E78">
+      <End Role="registration_mst" EntitySet="registration_mst" />
+      <End Role="login_mst" EntitySet="login_mst" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sequrity___login__182C9B23" Association="Self.FK__sequrity___login__182C9B23">
+      <End Role="login_mst" EntitySet="login_mst" />
+      <End Role="sequrity_mst" EntitySet="sequrity_mst" />
+    </AssociationSet>
+    <FunctionImport Name="registration_sp">
+      <Parameter Name="fname" Mode="In" Type="String" />
+      <Parameter Name="lname" Mode="In" Type="String" />
+      <Parameter Name="ac_no" Mode="In" Type="Int32" />
+      <Parameter Name="address" Mode="In" Type="String" />
+      <Parameter Name="b_name" Mode="In" Type="String" />
+      <Parameter Name="dob" Mode="In" Type="DateTime" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

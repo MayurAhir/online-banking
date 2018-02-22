@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BankingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="login_mst">
+    <Key>
+      <PropertyRef Name="login_id" />
+    </Key>
+    <Property Name="login_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reg_id" Type="int" />
+    <Property Name="user_nm" Type="varchar" MaxLength="30" />
+    <Property Name="password1" Type="varchar" MaxLength="30" />
+    <Property Name="isactive" Type="bit" />
+  </EntityType>
+  <EntityType Name="registration_mst">
+    <Key>
+      <PropertyRef Name="reg_id" />
+    </Key>
+    <Property Name="reg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="first_name" Type="varchar" MaxLength="30" />
+    <Property Name="last_name" Type="varchar" MaxLength="30" />
+    <Property Name="birth_date" Type="datetime" />
+    <Property Name="ac_no" Type="int" />
+    <Property Name="address1" Type="varchar" MaxLength="50" />
+    <Property Name="branch_name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sequrity_mst">
+    <Key>
+      <PropertyRef Name="sec_id" />
+    </Key>
+    <Property Name="sec_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="login_id" Type="int" />
+    <Property Name="q1" Type="varchar" MaxLength="100" />
+    <Property Name="ans1" Type="varchar" MaxLength="50" />
+    <Property Name="q2" Type="varchar" MaxLength="50" />
+    <Property Name="ans2" Type="varchar" MaxLength="50" />
+    <Property Name="q3" Type="varchar" MaxLength="100" />
+    <Property Name="ans3" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK__login_mst__reg_i__15502E78">
+    <End Role="registration_mst" Type="Self.registration_mst" Multiplicity="0..1" />
+    <End Role="login_mst" Type="Self.login_mst" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="registration_mst">
+        <PropertyRef Name="reg_id" />
+      </Principal>
+      <Dependent Role="login_mst">
+        <PropertyRef Name="reg_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sequrity___login__182C9B23">
+    <End Role="login_mst" Type="Self.login_mst" Multiplicity="0..1" />
+    <End Role="sequrity_mst" Type="Self.sequrity_mst" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="login_mst">
+        <PropertyRef Name="login_id" />
+      </Principal>
+      <Dependent Role="sequrity_mst">
+        <PropertyRef Name="login_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="registration_sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fname" Type="varchar" Mode="In" />
+    <Parameter Name="lname" Type="varchar" Mode="In" />
+    <Parameter Name="ac_no" Type="int" Mode="In" />
+    <Parameter Name="address" Type="varchar" Mode="In" />
+    <Parameter Name="b_name" Type="varchar" Mode="In" />
+    <Parameter Name="dob" Type="datetime" Mode="In" />
+  </Function>
+  <EntityContainer Name="BankingModelStoreContainer">
+    <EntitySet Name="login_mst" EntityType="Self.login_mst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="registration_mst" EntityType="Self.registration_mst" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sequrity_mst" EntityType="Self.sequrity_mst" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__login_mst__reg_i__15502E78" Association="Self.FK__login_mst__reg_i__15502E78">
+      <End Role="registration_mst" EntitySet="registration_mst" />
+      <End Role="login_mst" EntitySet="login_mst" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sequrity___login__182C9B23" Association="Self.FK__sequrity___login__182C9B23">
+      <End Role="login_mst" EntitySet="login_mst" />
+      <End Role="sequrity_mst" EntitySet="sequrity_mst" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

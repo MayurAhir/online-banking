@@ -1,0 +1,5 @@
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\BusinessObject\bin\Debug\BusinessObject.dll
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\BusinessObject\bin\Debug\BusinessObject.pdb
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\BusinessObject\obj\Debug\BusinessObject.dll
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\BusinessObject\obj\Debug\BusinessObject.pdb
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\BusinessObject\obj\Debug\BusinessObject.csprojResolveAssemblyReference.cache

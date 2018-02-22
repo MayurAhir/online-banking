@@ -1,0 +1,10 @@
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\bin\Debug\DataLogic.dll.config
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\bin\Debug\DataLogic.dll
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\bin\Debug\DataLogic.pdb
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\bin\Debug\BusinessObject.dll
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\bin\Debug\EntityFramework.dll
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\bin\Debug\BusinessObject.pdb
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\bin\Debug\EntityFramework.xml
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\obj\Debug\DataLogic.csprojResolveAssemblyReference.cache
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\obj\Debug\DataLogic.dll
+C:\Users\lenovo\Documents\Visual Studio 2015\Projects\OnlineBanking\DataLogic\obj\Debug\DataLogic.pdb

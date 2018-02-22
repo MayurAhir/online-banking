@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BankingModelStoreContainer" CdmEntityContainer="BankingEntities">
+    <EntitySetMapping Name="login_mst">
+      <EntityTypeMapping TypeName="BankingModel.login_mst">
+        <MappingFragment StoreEntitySet="login_mst">
+          <ScalarProperty Name="login_id" ColumnName="login_id" />
+          <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+          <ScalarProperty Name="user_nm" ColumnName="user_nm" />
+          <ScalarProperty Name="password1" ColumnName="password1" />
+          <ScalarProperty Name="isactive" ColumnName="isactive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="registration_mst">
+      <EntityTypeMapping TypeName="BankingModel.registration_mst">
+        <MappingFragment StoreEntitySet="registration_mst">
+          <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+          <ScalarProperty Name="ac_no" ColumnName="ac_no" />
+          <ScalarProperty Name="address1" ColumnName="address1" />
+          <ScalarProperty Name="branch_name" ColumnName="branch_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sequrity_mst">
+      <EntityTypeMapping TypeName="BankingModel.sequrity_mst">
+        <MappingFragment StoreEntitySet="sequrity_mst">
+          <ScalarProperty Name="sec_id" ColumnName="sec_id" />
+          <ScalarProperty Name="login_id" ColumnName="login_id" />
+          <ScalarProperty Name="q1" ColumnName="q1" />
+          <ScalarProperty Name="ans1" ColumnName="ans1" />
+          <ScalarProperty Name="q2" ColumnName="q2" />
+          <ScalarProperty Name="ans2" ColumnName="ans2" />
+          <ScalarProperty Name="q3" ColumnName="q3" />
+          <ScalarProperty Name="ans3" ColumnName="ans3" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="registration_sp" FunctionName="BankingModel.Store.registration_sp" />
+  </EntityContainerMapping>
+</Mapping>

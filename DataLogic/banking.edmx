@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BankingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="login_mst">
+          <Key>
+            <PropertyRef Name="login_id" />
+          </Key>
+          <Property Name="login_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reg_id" Type="int" />
+          <Property Name="user_nm" Type="varchar" MaxLength="30" />
+          <Property Name="password1" Type="varchar" MaxLength="30" />
+          <Property Name="isactive" Type="bit" />
+        </EntityType>
+        <EntityType Name="registration_mst">
+          <Key>
+            <PropertyRef Name="reg_id" />
+          </Key>
+          <Property Name="reg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="30" />
+          <Property Name="last_name" Type="varchar" MaxLength="30" />
+          <Property Name="birth_date" Type="datetime" />
+          <Property Name="ac_no" Type="int" />
+          <Property Name="address1" Type="varchar" MaxLength="50" />
+          <Property Name="branch_name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sequrity_mst">
+          <Key>
+            <PropertyRef Name="sec_id" />
+          </Key>
+          <Property Name="sec_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login_id" Type="int" />
+          <Property Name="q1" Type="varchar" MaxLength="100" />
+          <Property Name="ans1" Type="varchar" MaxLength="50" />
+          <Property Name="q2" Type="varchar" MaxLength="50" />
+          <Property Name="ans2" Type="varchar" MaxLength="50" />
+          <Property Name="q3" Type="varchar" MaxLength="100" />
+          <Property Name="ans3" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__login_mst__reg_i__15502E78">
+          <End Role="registration_mst" Type="Self.registration_mst" Multiplicity="0..1" />
+          <End Role="login_mst" Type="Self.login_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registration_mst">
+              <PropertyRef Name="reg_id" />
+            </Principal>
+            <Dependent Role="login_mst">
+              <PropertyRef Name="reg_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sequrity___login__182C9B23">
+          <End Role="login_mst" Type="Self.login_mst" Multiplicity="0..1" />
+          <End Role="sequrity_mst" Type="Self.sequrity_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login_mst">
+              <PropertyRef Name="login_id" />
+            </Principal>
+            <Dependent Role="sequrity_mst">
+              <PropertyRef Name="login_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="registration_sp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fname" Type="varchar" Mode="In" />
+          <Parameter Name="lname" Type="varchar" Mode="In" />
+          <Parameter Name="ac_no" Type="int" Mode="In" />
+          <Parameter Name="address" Type="varchar" Mode="In" />
+          <Parameter Name="b_name" Type="varchar" Mode="In" />
+          <Parameter Name="dob" Type="datetime" Mode="In" />
+        </Function>
+        <EntityContainer Name="BankingModelStoreContainer">
+          <EntitySet Name="login_mst" EntityType="Self.login_mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="registration_mst" EntityType="Self.registration_mst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sequrity_mst" EntityType="Self.sequrity_mst" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__login_mst__reg_i__15502E78" Association="Self.FK__login_mst__reg_i__15502E78">
+            <End Role="registration_mst" EntitySet="registration_mst" />
+            <End Role="login_mst" EntitySet="login_mst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sequrity___login__182C9B23" Association="Self.FK__sequrity___login__182C9B23">
+            <End Role="login_mst" EntitySet="login_mst" />
+            <End Role="sequrity_mst" EntitySet="sequrity_mst" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BankingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="login_mst">
+          <Key>
+            <PropertyRef Name="login_id" />
+          </Key>
+          <Property Name="login_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reg_id" Type="Int32" />
+          <Property Name="user_nm" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="password1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="isactive" Type="Boolean" />
+          <NavigationProperty Name="registration_mst" Relationship="Self.FK__login_mst__reg_i__15502E78" FromRole="login_mst" ToRole="registration_mst" />
+          <NavigationProperty Name="sequrity_mst" Relationship="Self.FK__sequrity___login__182C9B23" FromRole="login_mst" ToRole="sequrity_mst" />
+        </EntityType>
+        <EntityType Name="registration_mst">
+          <Key>
+            <PropertyRef Name="reg_id" />
+          </Key>
+          <Property Name="reg_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="birth_date" Type="DateTime" Precision="3" />
+          <Property Name="ac_no" Type="Int32" />
+          <Property Name="address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="branch_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="login_mst" Relationship="Self.FK__login_mst__reg_i__15502E78" FromRole="registration_mst" ToRole="login_mst" />
+        </EntityType>
+        <EntityType Name="sequrity_mst">
+          <Key>
+            <PropertyRef Name="sec_id" />
+          </Key>
+          <Property Name="sec_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login_id" Type="Int32" />
+          <Property Name="q1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ans1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="q2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ans2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="q3" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ans3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="login_mst" Relationship="Self.FK__sequrity___login__182C9B23" FromRole="sequrity_mst" ToRole="login_mst" />
+        </EntityType>
+        <Association Name="FK__login_mst__reg_i__15502E78">
+          <End Role="registration_mst" Type="Self.registration_mst" Multiplicity="0..1" />
+          <End Role="login_mst" Type="Self.login_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="registration_mst">
+              <PropertyRef Name="reg_id" />
+            </Principal>
+            <Dependent Role="login_mst">
+              <PropertyRef Name="reg_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__sequrity___login__182C9B23">
+          <End Role="login_mst" Type="Self.login_mst" Multiplicity="0..1" />
+          <End Role="sequrity_mst" Type="Self.sequrity_mst" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="login_mst">
+              <PropertyRef Name="login_id" />
+            </Principal>
+            <Dependent Role="sequrity_mst">
+              <PropertyRef Name="login_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BankingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="login_mst" EntityType="Self.login_mst" />
+          <EntitySet Name="registration_mst" EntityType="Self.registration_mst" />
+          <EntitySet Name="sequrity_mst" EntityType="Self.sequrity_mst" />
+          <AssociationSet Name="FK__login_mst__reg_i__15502E78" Association="Self.FK__login_mst__reg_i__15502E78">
+            <End Role="registration_mst" EntitySet="registration_mst" />
+            <End Role="login_mst" EntitySet="login_mst" />
+          </AssociationSet>
+          <AssociationSet Name="FK__sequrity___login__182C9B23" Association="Self.FK__sequrity___login__182C9B23">
+            <End Role="login_mst" EntitySet="login_mst" />
+            <End Role="sequrity_mst" EntitySet="sequrity_mst" />
+          </AssociationSet>
+          <FunctionImport Name="registration_sp">
+            <Parameter Name="fname" Mode="In" Type="String" />
+            <Parameter Name="lname" Mode="In" Type="String" />
+            <Parameter Name="ac_no" Mode="In" Type="Int32" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="b_name" Mode="In" Type="String" />
+            <Parameter Name="dob" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BankingModelStoreContainer" CdmEntityContainer="BankingEntities">
+          <EntitySetMapping Name="login_mst">
+            <EntityTypeMapping TypeName="BankingModel.login_mst">
+              <MappingFragment StoreEntitySet="login_mst">
+                <ScalarProperty Name="login_id" ColumnName="login_id" />
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+                <ScalarProperty Name="user_nm" ColumnName="user_nm" />
+                <ScalarProperty Name="password1" ColumnName="password1" />
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="registration_mst">
+            <EntityTypeMapping TypeName="BankingModel.registration_mst">
+              <MappingFragment StoreEntitySet="registration_mst">
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+                <ScalarProperty Name="ac_no" ColumnName="ac_no" />
+                <ScalarProperty Name="address1" ColumnName="address1" />
+                <ScalarProperty Name="branch_name" ColumnName="branch_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sequrity_mst">
+            <EntityTypeMapping TypeName="BankingModel.sequrity_mst">
+              <MappingFragment StoreEntitySet="sequrity_mst">
+                <ScalarProperty Name="sec_id" ColumnName="sec_id" />
+                <ScalarProperty Name="login_id" ColumnName="login_id" />
+                <ScalarProperty Name="q1" ColumnName="q1" />
+                <ScalarProperty Name="ans1" ColumnName="ans1" />
+                <ScalarProperty Name="q2" ColumnName="q2" />
+                <ScalarProperty Name="ans2" ColumnName="ans2" />
+                <ScalarProperty Name="q3" ColumnName="q3" />
+                <ScalarProperty Name="ans3" ColumnName="ans3" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="registration_sp" FunctionName="BankingModel.Store.registration_sp" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
